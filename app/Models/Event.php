@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
+class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'event_date', 'team_id'];
 
-    public function events()
+    public function team()
     {
-        return $this->hasMany(Event::class);
+        return $this->belongsTo(Team::class);
     }
 }

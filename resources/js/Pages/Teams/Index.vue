@@ -16,6 +16,10 @@
             </tbody>
         </table>
         <Link href="/teams/create">Add New Team</Link>
+        <div>
+            <Link type="button" href="/teams/create" class="ml-auto">Add New Team
+            </Link>
+        </div>
     </div>
 </template>
 
