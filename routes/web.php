@@ -9,6 +9,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,15 @@ Route::post('register', [RegisterController::class, 'store']);
 Route::get('/', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
+
+Route::redirect('/dashboard', '/')
+    ->middleware('auth');
+
+
+// Teams
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
+Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
 
 // Users
 
