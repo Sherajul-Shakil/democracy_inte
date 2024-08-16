@@ -26,7 +26,7 @@ class EventController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:155',
-            'event_date' => 'required|date',
+            'event_date' => 'required|date||before_or_equal:today',
             'team_id' => 'required|exists:teams,id',
         ]);
 
