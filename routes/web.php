@@ -61,6 +61,9 @@ Route::put('/teams/{team}', [TeamController::class, 'update'])->name('teams.upda
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
 Route::post('/events', [EventController::class, 'store'])->name('events.store');
+Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+
 
 // Users
 

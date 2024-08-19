@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <div class="px-4 py-5 sm:px-6">
                 <h1 class="text-lg leading-6 font-medium text-gray-900">Team List</h1>
@@ -29,6 +29,7 @@
 
 <script>
 import { Link } from '@inertiajs/vue3';
+import Layout from '@/Shared/Layout.vue'
 
 export default {
     props: {
@@ -37,6 +38,7 @@ export default {
     components: {
         Link,
     },
+    layout: Layout,
     methods: {
         editTeam(id) {
             this.$inertia.get(`/teams/${id}/edit`);
