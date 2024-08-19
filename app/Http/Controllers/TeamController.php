@@ -16,7 +16,7 @@ class TeamController extends Controller
 
     public function create()
     {
-        return inertia('Teams/Create');
+        return inertia('Teams/Form');
     }
 
     public function store(Request $request)
@@ -29,6 +29,25 @@ class TeamController extends Controller
 
         return redirect()->route('teams.index')->with('success', 'Team created successfully.');
     }
+
+    public function edit(Team $team)
+    {
+        return inertia('Teams/Form', [
+            'team' => $team,
+        ]);
+    }
+
+    public function update(Request $request, Team $team)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        $team->update($request->all());
+
+        return redirect()->route('teams.index')->with('success', 'Team updated successfully');
+    }
+
 
 
 }

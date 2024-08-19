@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
-        <h1 class="text-xl font-semibold text-gray-700 mb-4">Create Team</h1>
+        <h1 class="text-xl font-semibold text-gray-700 mb-4">{{ isEditMode ? 'Edit Team' : 'Create Team' }}</h1>
         <form @submit.prevent="submit">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Team Name</label>
@@ -10,7 +10,7 @@
             </div>
             <button type="submit"
                 class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Create
+                {{ isEditMode ? 'Update' : 'Create' }}
             </button>
         </form>
     </div>
@@ -20,20 +20,36 @@
 import { useForm } from '@inertiajs/vue3';
 
 export default {
-    setup() {
+    props: {
+        team: {
+            type: Object,
+            default: null,
+        },
+    },
+    setup(props) {
+        const isEditMode = !!props.team;
+
         const form = useForm({
-            name: '',
+            name: props.team?.name || '',
         });
 
         function submit() {
-            form.post('/teams', {
-                onSuccess: () => {
-                    form.reset();
-                },
-            });
+            if (isEditMode) {
+                form.put(`/teams/${props.team.id}`, {
+                    onSuccess: () => {
+                        form.reset();
+                    },
+                });
+            } else {
+                form.post('/teams', {
+                    onSuccess: () => {
+                        form.reset();
+                    },
+                });
+            }
         }
 
-        return { form, submit };
+        return { form, submit, isEditMode };
     },
 };
 </script>
